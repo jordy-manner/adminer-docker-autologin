@@ -1,5 +1,10 @@
 # Adminer docker autologin
 
+## References
+
+- [Docker Hub](https://hub.docker.com/r/mast3rm1lk/adminer-autologin)
+- [GitHub](https://github.com/jordy-manner/adminer-docker-autologin) 
+
 ## Quickstart
 
 ``` yaml
