@@ -87,6 +87,7 @@ services:
         image: mast3rm1lk/adminer-autologin
         environment:
               ADMINER_AUTOLOGIN: 1
+              ALLOW_EMPTY_PASSWORD: 1
               ADMINER_DRIVER: sqlite
               ADMINER_DB: "/db.sqlite"
         volumes:

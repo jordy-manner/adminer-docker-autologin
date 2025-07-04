@@ -8,7 +8,7 @@ function adminer_object(): object
 
     class AdminerCustomization extends Adminer\Plugins
     {
-        const DEFAULT_PASSWORD = 'DEFAULT_PASSWORD';
+        const string DEFAULT_PASSWORD = 'DEFAULT_PASSWORD';
 
         public function name(): ?string
         {
@@ -70,11 +70,14 @@ function adminer_object(): object
         }
     }
 
-    return new AdminerCustomization([
-        new AdminerLoginPasswordLess(
+    $plugins = [];
+    if (getenv('ALLOW_EMPTY_PASSWORD') === '1') {
+        $plugins[] = new AdminerLoginPasswordLess(
             password_hash(getenv('ADMINER_PASSWORD') ?: AdminerCustomization::DEFAULT_PASSWORD , PASSWORD_DEFAULT)
-        )
-    ]);
+        );
+    }
+
+    return new AdminerCustomization($plugins);
 }
 
 include __DIR__  . "/adminer.php";

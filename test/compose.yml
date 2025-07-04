@@ -1,0 +1,42 @@
+services:
+  manage-sqlite:
+    build:
+      context: ../src
+      dockerfile: Dockerfile
+    environment:
+      ADMINER_AUTOLOGIN: 1
+      ALLOW_EMPTY_PASSWORD: 1
+      ADMINER_DRIVER: sqlite
+      ADMINER_DB: /db.sqlite
+      ADMINER_NAME: SQlite Manager
+    volumes:
+      - ${PWD}/test/data/db.sqlite:/db.sqlite
+      - ${PWD}/src/data/index.php:/var/www/html/index.php
+      - ${PWD}/src/data/plugins:/var/www/html/plugins/
+
+  db-mysql:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQLD__character-set-server: 'utf8'
+      MYSQLD__max_allowed_packet: '128M'
+
+  manage-mysql:
+    build:
+      context: ../src
+      dockerfile: Dockerfile
+    environment:
+      ADMINER_AUTOLOGIN: 1
+      ADMINER_DB: test
+      ADMINER_DRIVER: server
+      ADMINER_USERNAME: test
+      ADMINER_PASSWORD: test
+      ADMINER_SERVER: db-mysql
+      ADMINER_NAME: MySQL Manager
+    volumes:
+      - ${PWD}/src/data/index.php:/var/www/html/index.php
+      - ${PWD}/src/data/plugins:/var/www/html/plugins/
