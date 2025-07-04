@@ -32,6 +32,12 @@ services:
 
 ## Configuration
 
+### ALLOW_EMPTY_PASSWORD
+
+Enable / Disable empty password ability.
+
+Default: `0`
+
 ### ADMINER_AUTOLOGIN
 
 Enable / Disable auto login.
