@@ -16,7 +16,6 @@ services:
 
   db-mysql:
     image: mariadb
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test
